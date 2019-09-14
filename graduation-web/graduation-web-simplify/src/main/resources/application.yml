@@ -1,0 +1,76 @@
+spring:
+  redis:
+    host: 47.106.78.139
+    password: 123456
+    port: 6379
+  application:
+    name: simplify
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.106.78.139:3306/mysql?useSSL=false&characterEncoding=utf8
+    username: root
+    password: 123456
+    druid:
+      initial-size: 3 #初始化连接数
+      time-between-eviction-runs-millis: 60000 #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      max-wait: 60000   #等待超时时间
+      min-idle: 1     #最小连接数
+      max-active: 3  #最大连接数   【连接数 = ((核心数 * 2) + 1)】
+      test-while-idle: true #是否在连接空闲一段时间后检测其可用性
+      test-on-borrow: false #是否在获得连接后检测其可用性 建议关闭，影响性能
+      test-on-return: false   #是否在连接放回连接池后检测其可用性 建议关闭，影响性能
+      min-evictable-idle-time-millis: 300000
+      max-open-prepared-statements: 20
+  rabbitmq:
+    host: 47.106.78.139
+    virtual-host: /
+    port: 5672
+    connection-timeout: 3000
+    username: ccj
+    password: ccj
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 10
+        retry:
+          max-attempts: 3
+          enabled: true
+          initial-interval: 2000
+        default-requeue-rejected: false
+        acknowledge-mode: manual
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50mb
+      max-request-size: 50mb
+  data:
+    mongodb:
+      port: 27017
+      username: admin
+      password: admin
+      authentication-database: admin
+      host: 47.106.78.139
+      database: admin
+server:
+  port: 8081
+  servlet:
+    session:
+      timeout: 180000
+      cookie:
+        path: /
+    context-path: /simplify
+logging:
+  pattern:
+    console: "%d - %msg%n"
+    level: INFO,ERROR,DEBUG
+  file: log/application.log
+  level:
+    cn.sise.datasource.mapper: DEBUG
+web:
+  auth:
+    login:
+      indexUrl: http://127.0.0.1:8081/index.html
+      loginUrl: http://127.0.0.1:8081/com.graduation.project.login.html
+  rsa-public: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCQT0cOIL11bsAXDc1FsZXbILiPJGAusvOcU+MiBnBPax9dKLi3s2J1X4Ih6aOpnrEht7Soh/iUPKODFIj2S/otWvRZL2xITDB7PObjm7BxWeVY8c38gtXwRTYfBSPUqqPxsS9wTGIw/QlXJZtyPCl4UUMmMS0+B/tUX9jV28/V+wIDAQAB
+  rsa-private: MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJBPRw4gvXVuwBcNzUWxldsguI8kYC6y85xT4yIGcE9rH10ouLezYnVfgiHpo6mesSG3tKiH+JQ8o4MUiPZL+i1a9FkvbEhMMHs85uObsHFZ5VjxzfyC1fBFNh8FI9Sqo/GxL3BMYjD9CVclm3I8KXhRQyYxLT4H+1Rf2NXbz9X7AgMBAAECgYAUmWxwJNZGjA+ZetvhZe8ZP3t4211rbRn/J65VbgvcGlN4zdZISq/0RzThOGOnU8K/KGT+ZaJjLqC8llLSrZfBaMP6ynqBxO1gF3Jhv4tHd4T9/ljOR3pFz9jcPcbv7quO+6MiKjFL80BPAR7eltf4WYYyuLQegvlw6jlNqLLRMQJBAMXMZ58wapVoqsL6ncuORn1d3PAVdYpxmP3pF+SlpJwFvI2nqBkwWIfnwvMS2gRUeCnXbxmBO7CwBM4VoioY4EkCQQC6xbcZYRpl1KzoFOeK3y1wc717ZCvIPeKXNz4q/wfCVpNL6wNasnwV5MtMgabdwiQLHD2KJO3skmGArkVYN8wjAkEAhFRU+u5EUELfA2Txjo5X4GWce06P/Zg0N6LrJkAfWXaJB+gjkP6ELCBEj6SMERuF7NBBdrm7+mA4Rru4axuLaQJAchPjUxgRRJNTDOn/xr2sBlxbJqu3ZjYOWWg/i4l71sKEc0FXKiWMTt8RIWirYBV9aF/WYrNNs0pxTWSkLE7gWwJBAKK80TiEHUQcG30bSbK2S4ImUj8+NEABQeDlh+v1C3SvZvmvrqOCJvEc9UGnJw1vUK8NXhHLOVUGe4JWvOhk1dA=
