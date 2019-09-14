@@ -10,6 +10,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>graduation-service</artifactId>
-
-
+    <packaging>pom</packaging>
+    <modules>
+        <module>graduation-service-common</module>
+    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.sise.graduation</groupId>
+            <artifactId>graduation-constant-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

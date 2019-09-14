@@ -17,7 +17,7 @@ public class WebAuthConfig {
 
     private String rsaPublicKey;
 
-    private String rsaPrivateKet;
+    private String rsaPrivateKey;
 
     private Boolean isEncodePassword;
 }
