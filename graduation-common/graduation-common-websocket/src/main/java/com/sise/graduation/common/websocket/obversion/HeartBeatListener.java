@@ -15,6 +15,7 @@ import org.springframework.web.socket.WebSocketSession;
  **/
 @Component(WebsocketConstant.COMMAND_HEART_BEAT)
 public class HeartBeatListener implements Listener {
+
     @Override
     public void open(WebSocketSession session) throws Exception{
 

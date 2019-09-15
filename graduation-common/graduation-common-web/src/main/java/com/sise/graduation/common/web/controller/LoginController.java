@@ -1,6 +1,4 @@
 package com.sise.graduation.common.web.controller;
-
-import com.alibaba.fastjson.JSONObject;
 import com.sise.graduation.common.redis.cache.RedisUtil;
 import com.sise.graduation.common.util.DateHelper;
 import com.sise.graduation.common.util.RSAEncrypt;
@@ -19,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
 import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -103,11 +100,11 @@ public class LoginController {
 		}
 		String decyptPasswd;
 		if (webAuthConfig.getIsEncodePassword() == null || webAuthConfig.getIsEncodePassword()){
+            //rsa解密操作
 			decyptPasswd = RSAEncrypt.decrypt(loginVo.getPassword(), webAuthConfig.getRsaPrivateKey()).toUpperCase();
 		}else{
 			decyptPasswd = loginVo.getPassword();
 		}
-		//rsa解密操作
 		loginVo.setDecyptPasswd(decyptPasswd);
 
 		//token验证
