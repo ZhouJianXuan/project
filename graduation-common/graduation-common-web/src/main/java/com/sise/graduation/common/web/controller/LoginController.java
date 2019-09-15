@@ -101,9 +101,13 @@ public class LoginController {
 			//参数校验失败会返回一个httpBody
 			return checkValid;
 		}
-
+		String decyptPasswd;
+		if (webAuthConfig.getIsEncodePassword() == null || webAuthConfig.getIsEncodePassword()){
+			decyptPasswd = RSAEncrypt.decrypt(loginVo.getPassword(), webAuthConfig.getRsaPrivateKey()).toUpperCase();
+		}else{
+			decyptPasswd = loginVo.getPassword();
+		}
 		//rsa解密操作
-		String decyptPasswd = RSAEncrypt.decrypt(loginVo.getPassword(), webAuthConfig.getRsaPrivateKey()).toUpperCase();
 		loginVo.setDecyptPasswd(decyptPasswd);
 
 		//token验证
