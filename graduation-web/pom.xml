@@ -7,6 +7,7 @@
     <artifactId>graduation-web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>university-fixed-assets</module>
         <module>graduation-web-simplify</module>
     </modules>
     <packaging>pom</packaging>
